@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 11:50:55 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:25:34 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ typedef struct s_ping
 	
 	struct timeval		send_time;
 } t_ping;
+
+void	init_ping(t_ping *ping);
+void	create_socket(t_ping *ping);
 
 #endif

@@ -6,7 +6,22 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 11:00:24 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:24:38 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ping.h"
+
+int main(int ac, char *av[])
+{
+	if (ac != 2)
+	{
+		printf("Wrong numbers of arguments\n");
+		printf("Usage: %s <host>\n", av[0]);
+		return (1);
+	}
+
+	t_ping ping;
+	init_ping(&ping);
+	
+}
