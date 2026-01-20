@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 14:24:38 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/20 14:32:10 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int main(int ac, char *av[])
 	}
 
 	t_ping ping;
-	init_ping(&ping);
 	
+	init_ping(&ping);
+	create_socket(&ping);
+	
+	//DEBUG
+	printf("Socket ICMP créé avec succès : %d\n", ping.sockfd);
+	
+	return (0);
 }
