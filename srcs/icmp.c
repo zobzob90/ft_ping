@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 18:47:22 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:17:48 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 uint16_t icmp_checksum(void *data, int len)
 {
+	uint16_t *buf;
+	uint32_t sum;
+	
 	if (!data || len < 0)
 		return (0);
-	uint16_t *buf = data;
-	uint32_t sum = 0;
+	buf = data;
+	sum = 0;
 	
 	while (len > 1)
 	{

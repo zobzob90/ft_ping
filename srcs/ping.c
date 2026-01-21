@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 19:04:20 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:07:42 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void resolve_hosts(t_ping *ping, char *host)
 	
 	if (getaddrinfo(host, NULL, &hints, &res) != 0)
 	{
-		perror("getaddrinfo");
+		perror("getaddrinfo() failed");
 		exit (1);
 	}
 	ping->dest_addr = *(struct sockaddr_in *)res->ai_addr;
@@ -57,7 +57,7 @@ void send_ping(t_ping *ping)
 	sent = sendto(ping->sockfd, &packet, sizeof(t_icmp_packet), 0, (struct sockaddr *)&ping->dest_addr, ping->addrlen);
 	if (sent < 0)
 	{
-		perror("sendto failed\n");
+		perror("sendto() failed\n");
 		return ;
 	}
 	ping->transmitted++;

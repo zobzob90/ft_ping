@@ -6,11 +6,12 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:57:09 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 18:22:12 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:16:53 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ping.h"
+#include "icmp.h"
 
 void	init_ping(t_ping *ping)
 {

@@ -6,7 +6,7 @@
 #    By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 00:00:00 by ertrigna          #+#    #+#              #
-#    Updated: 2026/01/21 18:48:59 by ertrigna         ###   ########.fr        #
+#    Updated: 2026/01/21 19:17:36 by ertrigna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS		= $(SRCS_DIR)/main.c \
 			  $(SRCS_DIR)/init.c \
 			  $(SRCS_DIR)/ping.c \
 			  $(SRCS_DIR)/signals.c \
-			  $(SRCS_DIR)/utils.c
+			  $(SRCS_DIR)/utils.c \
+			  $(SRCS_DIR)/icmp.c
 
 OBJS		= $(SRCS:.c=.o)
 

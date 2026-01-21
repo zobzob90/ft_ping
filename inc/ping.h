@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 18:56:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:07:27 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ typedef struct s_ping
 void	init_ping(t_ping *ping);					// init de la structure
 void	create_socket(t_ping *ping);				// creation du socket avec socket()
 void 	resolve_hosts(t_ping *ping, char *host);	// transforme une destination humaine en destination reseau
-void	send_ping(t_ping *ping);					// fonction principale qui envoie un ping formate en imcp
+void	send_ping(t_ping *ping);					// fonction principale qui envoie un ping formate en icmp
 
 #endif
