@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:42:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 11:56:42 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:21:16 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ typedef struct s_icmp_packet
 	char			payload[ICMP_PACKET_SIZE - sizeof(struct icmphdr)];
 } t_icmp_packet;
 
+void		init_tcmp_packet(t_icmp_packet *packet, int seq);
+uint16_t	icmp_checksum(void *data, int len);
 #endif

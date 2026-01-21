@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   socket.c                                           :+:      :+:    :+:   */
+/*   icmp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 13:28:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 14:18:58 by ertrigna         ###   ########.fr       */
+/*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
+/*   Updated: 2026/01/21 18:47:22 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ping.h"
 
-void create_socket(t_ping *ping)
+uint16_t icmp_checksum(void *data, int len)
 {
-	if (!ping)
-		return ;
-	ping->sockfd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if (ping->sockfd < 0)
+	if (!data || len < 0)
+		return (0);
+	uint16_t *buf = data;
+	uint32_t sum = 0;
+	
+	while (len > 1)
 	{
-		perror("socket() failed");
-		exit (EXIT_FAILURE);
+		sum += *buf++;
+		len -= 2;
 	}
+	if (len == 1)
+		sum += *(uint8_t *)buf;
+	sum = (sum >> 16) + (sum & 0xffff);
+	sum += (sum >> 16);
+	return ((uint16_t)(~sum));
 }

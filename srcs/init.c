@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:57:09 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 15:41:41 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:22:12 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,7 @@ void	init_tcmp_packet(t_icmp_packet *packet, int seq)
 
 	gettimeofday(&tv, NULL);
 	memcpy(packet->payload, &tv, sizeof(tv));
+
+	packet->header.checksum = 0;
+	packet->header.checksum = icmp_checksum(packet, sizeof(t_icmp_packet));
 }
