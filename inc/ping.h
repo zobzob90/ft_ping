@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 19:07:27 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:26:49 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_ping
 	int					seq;
 	int					transmitted;
 	int					received;
+	int					verbose;
+	char				*hostname;
 	
 	struct timeval		send_time;
 } t_ping;

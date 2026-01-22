@@ -6,11 +6,19 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 15:39:12 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:28:21 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ping.h"
+
+volatile sig_atomic_t g_signal = 0;
+
+void	signal_handler(int sig)
+{
+	(void)sig;
+	g_signal = 1;
+}
 
 int main(int ac, char *av[])
 {
@@ -18,16 +26,12 @@ int main(int ac, char *av[])
 	uint8_t	buffer[1024];
 	ssize_t	bytes;
 	
-	if (ac != 2)
-	{
-		printf("Wrong numbers of arguments\n");
-		printf("Usage: %s <host>\n", av[0]);
-		return (1);
-	}	
 	init_ping(&ping);
-	resolve_hosts(&ping, av[1]);
+	if (parse_arguments(ac, av, &ping) < 0)
+		return (1);
 	create_socket(&ping);
-	while (1)
+	printf("PING %s (%s): 56 data bytes\n", ping.hostname, inet_ntoa(ping.dest_addr.sin_addr));
+	while (!g_signal)
 	{
 		send_ping(&ping);
 		bytes = recv_packet(&ping, buffer, sizeof(buffer));
@@ -35,9 +39,10 @@ int main(int ac, char *av[])
 			parse_packet(&ping, buffer, bytes);
 		else if (bytes == 0)
 			printf("Request timeout for icmp_seq %d\n", ping.seq);
-		ping.seq++;
-		ping.transmitted++;
 		sleep(1);
 	}
+	// if (g_signal)
+	// 	print_stat(&ping);
+	close(ping.sockfd);
 	return (0);
 }

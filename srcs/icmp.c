@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 15:39:44 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:57:12 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ int	parse_icmp(t_ping *ping, uint8_t *packet, ssize_t len, int seq)
 		return (-1);
 	icmp_packet = (t_icmp_packet *)packet;
 	if (icmp_packet->header.type != ICMP_ECHOREPLY)
+	{
+		if (ping->verbose)
+			printf("Received ICMP packet type %d, code %d\n", icmp_packet->header.type, icmp_packet->header.code);
 		return (-1);
+	}
 	if (ntohs(icmp_packet->header.un.echo.id) != getpid())
 		return (-1);
 	if (ntohs(icmp_packet->header.un.echo.sequence) != seq)
