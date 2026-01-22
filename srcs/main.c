@@ -6,36 +6,38 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 11:26:17 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:32:30 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ping.h"
 
-void	main_running(t_ping *ping, char *av[])
-{
-	init_ping(ping);
-	create_socket(ping);
-	resolve_hosts(ping, *av);
-	send_ping(ping);
-}
-
 int main(int ac, char *av[])
 {
+	t_ping 	ping;
+	uint8_t	buffer[1024];
+	ssize_t	bytes;
+	
 	if (ac != 2)
 	{
 		printf("Wrong numbers of arguments\n");
 		printf("Usage: %s <host>\n", av[0]);
 		return (1);
-	}
-
-	t_ping ping;
-	
+	}	
 	init_ping(&ping);
+	resolve_hosts(&ping, av[1]);
 	create_socket(&ping);
-	
-	//DEBUG
-	printf("Socket ICMP créé avec succès : %d\n", ping.sockfd);
-	
+	while (1)
+	{
+		send_ping(&ping);
+		bytes = recv_packet(ping, buffer, sizeof(buffer));
+		if (bytes > 0)
+			parse_packet(&ping, buffer, bytes);
+		else if (bytes == 0)
+			printf("Request timeout for icmp_seq %d\n", ping.seq);
+		ping.seq++;
+		ping.transmitted++;
+		sleep(1);
+	}
 	return (0);
 }

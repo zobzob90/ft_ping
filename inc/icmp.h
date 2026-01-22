@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:42:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 18:21:16 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:12:39 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ typedef struct s_icmp_packet
 
 void		init_tcmp_packet(t_icmp_packet *packet, int seq);
 uint16_t	icmp_checksum(void *data, int len);
+ssize_t 	recv_packet(t_ping *ping, uint8_t *buffer, size_t size);
+int			parse_packet(t_ping *ping, uint8_t *buf, ssize_t len);
+int			parse_icmp(t_ping *ping, uint8_t *packet, ssize_t len, int seq);
+int			handle_echo_reply(t_ping *ping, uint8_t *packet, ssize_t len, int seq);
+
 #endif

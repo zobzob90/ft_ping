@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 14:03:36 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:33:21 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	parse_packet(t_ping *ping, uint8_t *buf, ssize_t len)
 	
 }
 
-
 int	parse_icmp(t_ping *ping, uint8_t *packet, ssize_t len, int seq)
 {
 	t_icmp_packet *icmp_packet;
@@ -86,5 +85,18 @@ int	parse_icmp(t_ping *ping, uint8_t *packet, ssize_t len, int seq)
 
 int	handle_echo_reply(t_ping *ping, uint8_t *packet, ssize_t len, int seq)
 {
+	t_icmp_packet	*icmp_packet;
+	struct timeval	sentime;
+	struct timeval	now;
+	long			rtt_ms;
 	
+	if (!ping || !packet || len < (ssize_t)sizeof(t_icmp_packet))
+		return (-1);
+	icmp_packet = (t_icmp_packet *)packet;
+	memcpy(&sentime, icmp_packet->payload, sizeof(struct timeval));
+	gettimeofday(&now, NULL);
+	rtt_ms = (now.tv_sec - sentime.tv_sec) * 1000 + (now.tv_usec - sentime.tv_usec) / 1000;
+	ping->received++;
+	printf("%ld bytes from %s: icmp_seq=%d time=%ld ms\n", len, inet_ntoa(ping->dest_addr.sin_addr), seq, rtt_ms);
+	return (0);
 }
