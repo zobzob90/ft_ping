@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:42:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 15:12:39 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:38:33 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <netinet/ip_icmp.h>
 
 #define ICMP_PACKET_SIZE 64
+
+typedef struct s_ping t_ping;
 
 typedef struct s_icmp_packet
 {

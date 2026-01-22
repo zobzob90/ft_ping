@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 15:33:21 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:39:44 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse_packet(t_ping *ping, uint8_t *buf, ssize_t len)
 		return (-1);
 	ip_hdr = (struct iphdr *)buf;
 	ip_len = ip_hdr->ihl * 4;
-	if (len < ip_len + sizeof(struct icmphdr))
+	if (len < (ssize_t)(ip_len + sizeof(struct icmphdr)))
 		return (-1);
 	icmp_hdr = (struct icmphdr *)(buf + ip_len);
 	return (parse_icmp(ping, buf + ip_len, len - ip_len, icmp_hdr->un.echo.sequence));
