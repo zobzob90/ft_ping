@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 17:28:21 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:34:29 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int main(int ac, char *av[])
 			printf("Request timeout for icmp_seq %d\n", ping.seq);
 		sleep(1);
 	}
-	// if (g_signal)
-	// 	print_stat(&ping);
+	if (g_signal)
+		print_stat(&ping);
 	close(ping.sockfd);
 	return (0);
 }
