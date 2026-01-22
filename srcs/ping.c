@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/21 19:07:42 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:02:46 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void create_socket(t_ping *ping)
 
 void resolve_hosts(t_ping *ping, char *host)
 {
-	if (!ping || !host)
-		return ;
 	struct addrinfo hints;
 	struct addrinfo *res;
 
+	if (!ping || !host)
+		return ;
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_RAW;

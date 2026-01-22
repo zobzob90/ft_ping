@@ -6,11 +6,19 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/20 14:32:10 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:26:17 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ping.h"
+
+void	main_running(t_ping *ping, char *av[])
+{
+	init_ping(ping);
+	create_socket(ping);
+	resolve_hosts(ping, *av);
+	send_ping(ping);
+}
 
 int main(int ac, char *av[])
 {
