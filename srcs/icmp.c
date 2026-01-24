@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   icmp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 16:57:12 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:07:41 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	parse_packet(t_ping *ping, uint8_t *buf, ssize_t len)
 	if (len < (ssize_t)(ip_len + sizeof(struct icmphdr)))
 		return (-1);
 	icmp_hdr = (struct icmphdr *)(buf + ip_len);
-	return (parse_icmp(ping, buf + ip_len, len - ip_len, icmp_hdr->un.echo.sequence));
-	
+	return (parse_icmp(ping, buf + ip_len, len - ip_len, ntohs(icmp_hdr->un.echo.sequence)));	
 }
 
 int	parse_icmp(t_ping *ping, uint8_t *packet, ssize_t len, int seq)

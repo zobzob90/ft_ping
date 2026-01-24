@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 17:34:29 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 12:10:23 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int ac, char *av[])
 	uint8_t	buffer[1024];
 	ssize_t	bytes;
 	
+	signal(SIGINT, signal_handler);
 	init_ping(&ping);
 	if (parse_arguments(ac, av, &ping) < 0)
 		return (1);
