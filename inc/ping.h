@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ping.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 17:26:49 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:01:35 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_ping
 	int					transmitted;
 	int					received;
 	int					verbose;
+	int					count;
 	char				*hostname;
 	
 	struct timeval		send_time;

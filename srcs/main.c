@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 12:10:23 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/24 15:01:33 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int ac, char *av[])
 		return (1);
 	create_socket(&ping);
 	printf("PING %s (%s): 56 data bytes\n", ping.hostname, inet_ntoa(ping.dest_addr.sin_addr));
-	while (!g_signal)
+	while (!g_signal && (ping.count == 0 || ping.transmitted < ping.count))
 	{
 		send_ping(&ping);
 		bytes = recv_packet(&ping, buffer, sizeof(buffer));
@@ -42,7 +42,7 @@ int main(int ac, char *av[])
 			printf("Request timeout for icmp_seq %d\n", ping.seq);
 		sleep(1);
 	}
-	if (g_signal)
+	if (g_signal || ping.transmitted > 0)
 		print_stat(&ping);
 	close(ping.sockfd);
 	return (0);

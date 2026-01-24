@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ping.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 14:02:46 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:04:07 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void send_ping(t_ping *ping)
 		perror("sendto() failed\n");
 		return ;
 	}
+	if (ping->verbose)
+		printf("Sent ICMP ECHO_REQUEST, seq=%d, id=%d, size=%ld bytes\n", ping->seq, getpid(), sent);
 	ping->transmitted++;
 	ping->seq++;
 }

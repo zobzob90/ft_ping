@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:57:09 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 17:27:24 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:01:37 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	init_ping(t_ping *ping)
 	ping->received = 0; 						// paquets recu
 	ping->addrlen = sizeof(ping->dest_addr);	// taille de l'addresse
 	ping->verbose = 0;
-	ping->hostname = " ";							// pour le flag -v
+	ping->count = 0;							// 0 = infini
+	ping->hostname = " ";						// pour le flag -v
 }
 
 void	init_tcmp_packet(t_icmp_packet *packet, int seq)

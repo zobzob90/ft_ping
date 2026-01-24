@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:10:01 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/22 17:27:43 by ertrigna         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:01:30 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(char *progname)
 {
-	fprintf(stderr, "Usage: %s [-v] [-?] <destination>\n", progname);
+	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] <destination>\n", progname);
 }
 
 int	parse_arguments(int ac, char *av[], t_ping *ping)
@@ -37,6 +37,21 @@ int	parse_arguments(int ac, char *av[], t_ping *ping)
 		{
 			print_usage(av[0]);
 			exit (0);
+		}
+		else if (strcmp(av[i], "-c") == 0)
+		{
+			if (i + 1 >= ac)
+			{
+				fprintf(stderr, "ft_ping: option requires an argument -- 'c'\n");
+				return (-1);
+			}
+			ping->count = atoi(av[i + 1]);
+			if (ping->count <= 0)
+			{
+				fprintf(stderr, "ft_ping: bad number of packets to transmit.\n");
+				return (-1);
+			}
+			i++;
 		}
 		else if (av[i][0] == '-')
 		{
