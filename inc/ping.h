@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:01:35 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 12:30:42 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <signal.h>
+#include <math.h>
 
 #include <netinet/ip.h>
 
@@ -43,6 +44,11 @@ typedef struct s_ping
 	int					verbose;
 	int					count;
 	char				*hostname;
+
+	double				rtt_min;
+	double				rtt_max;
+	double				rtt_sum;
+	double				rtt_sum_sq;
 	
 	struct timeval		send_time;
 } t_ping;

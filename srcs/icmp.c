@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 17:17:56 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:04:10 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 12:28:52 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,28 @@ int	handle_echo_reply(t_ping *ping, uint8_t *packet, ssize_t len, int seq)
 	t_icmp_packet	*icmp_packet;
 	struct timeval	sentime;
 	struct timeval	now;
-	long			rtt_ms;
+	double			rtt_ms;
 	
 	if (!ping || !packet || len < (ssize_t)sizeof(t_icmp_packet))
 		return (-1);
 	icmp_packet = (t_icmp_packet *)packet;
 	memcpy(&sentime, icmp_packet->payload, sizeof(struct timeval));
 	gettimeofday(&now, NULL);
-	rtt_ms = (now.tv_sec - sentime.tv_sec) * 1000 + (now.tv_usec - sentime.tv_usec) / 1000;
+	rtt_ms = (now.tv_sec - sentime.tv_sec) * 1000.0 + (now.tv_usec - sentime.tv_usec) / 1000.0;
 	ping->received++;
+	if (rtt_ms < ping->rtt_min)
+		ping->rtt_min = rtt_ms;
+	if (rtt_ms > ping->rtt_max)
+		ping->rtt_max = rtt_ms;
+	ping->rtt_sum += rtt_ms;
+	ping->rtt_sum_sq += rtt_ms * rtt_ms;
 	if (ping->verbose)
-		printf("%ld bytes from %s: icmp_seq=%d ttl=%d time=%ld ms (type=%d, code=%d, id=%d)\n", 
+		printf("%ld bytes from %s: icmp_seq=%d ttl=%d time=%.3f ms (type=%d, code=%d, id=%d)\n", 
 			len, inet_ntoa(ping->dest_addr.sin_addr), seq, 
 			((struct iphdr *)((uint8_t *)packet - sizeof(struct iphdr)))->ttl,
 			rtt_ms, icmp_packet->header.type, icmp_packet->header.code, 
 			ntohs(icmp_packet->header.un.echo.id));
 	else
-		printf("%ld bytes from %s: icmp_seq=%d time=%ld ms\n", len, inet_ntoa(ping->dest_addr.sin_addr), seq, rtt_ms);
+		printf("%ld bytes from %s: icmp_seq=%d time=%.3f ms\n", len, inet_ntoa(ping->dest_addr.sin_addr), seq, rtt_ms);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:57:09 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:01:37 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 12:24:51 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	init_ping(t_ping *ping)
 	ping->verbose = 0;
 	ping->count = 0;							// 0 = infini
 	ping->hostname = " ";						// pour le flag -v
+	ping->rtt_min = 999999.0;
+	ping->rtt_max = 0.0;
+	ping->rtt_sum = 0.0;
+	ping->rtt_sum_sq = 0.0;
 }
 
 void	init_tcmp_packet(t_icmp_packet *packet, int seq)
