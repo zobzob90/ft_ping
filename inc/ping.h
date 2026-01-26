@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:40:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 14:35:43 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 15:46:33 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_ping
 	int					count;
 	double				interval;
 	int					timeout;
+	int					numeric;
 	char				*hostname;
 
 	double				rtt_min;

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:57:09 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 14:36:09 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 15:46:56 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_ping(t_ping *ping)
 	ping->interval = 1.0;						// interval a 1 de base
 	ping->timeout = 1;							// timeout defini a 1sec de base
 	ping->hostname = " ";						// pour le flag -v
+	ping->numeric = 0;
 	ping->rtt_min = 999999.0;
 	ping->rtt_max = 0.0;
 	ping->rtt_sum = 0.0;

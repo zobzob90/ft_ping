@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 14:15:21 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 15:48:59 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int main(int ac, char *av[])
 	if (parse_arguments(ac, av, &ping) < 0)
 		return (1);
 	create_socket(&ping);
-	printf("PING %s (%s): 56 data bytes\n", ping.hostname, inet_ntoa(ping.dest_addr.sin_addr));
+	if (ping.numeric)
+		printf("PING %s (%s): 56 data bytes\n", inet_ntoa(ping.dest_addr.sin_addr), inet_ntoa(ping.dest_addr.sin_addr));
+	else
+		printf("PING %s (%s): 56 data bytes\n", ping.hostname, inet_ntoa(ping.dest_addr.sin_addr));
 	while (!g_signal && (ping.count == 0 || ping.transmitted < ping.count))
 	{
 		send_ping(&ping);

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:10:01 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 14:39:15 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 15:48:05 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(char *progname)
 {
-	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] [-i interval] [-W timeout] <destination>\n", progname);
+	fprintf(stderr, "Usage: %s [-v] [-?] [-n] [-c count] [-i interval] [-W timeout] <destination>\n", progname);
 }
 
 int	parse_arguments(int ac, char *av[], t_ping *ping)
@@ -33,6 +33,8 @@ int	parse_arguments(int ac, char *av[], t_ping *ping)
 	{
 		if (strcmp(av[i], "-v") == 0)
 			ping->verbose = 1;
+		else if (strcmp(av[i], "-n") == 0)
+			ping->numeric = 1;
 		else if (strcmp(av[i], "-?") == 0)
 		{
 			print_usage(av[0]);
