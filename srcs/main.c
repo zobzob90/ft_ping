@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:00:23 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:01:33 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 14:15:21 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int ac, char *av[])
 			parse_packet(&ping, buffer, bytes);
 		else if (bytes == 0)
 			printf("Request timeout for icmp_seq %d\n", ping.seq);
-		sleep(1);
+		usleep((unsigned int)(ping.interval * 1000000));
 	}
 	if (g_signal || ping.transmitted > 0)
 		print_stat(&ping);

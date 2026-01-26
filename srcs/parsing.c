@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:10:01 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:01:30 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 14:19:27 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(char *progname)
 {
-	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] <destination>\n", progname);
+	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] [-i interval] <destination>\n", progname);
 }
 
 int	parse_arguments(int ac, char *av[], t_ping *ping)
@@ -49,6 +49,21 @@ int	parse_arguments(int ac, char *av[], t_ping *ping)
 			if (ping->count <= 0)
 			{
 				fprintf(stderr, "ft_ping: bad number of packets to transmit.\n");
+				return (-1);
+			}
+			i++;
+		}
+		else if (strcmp(av[i], "-i") == 0)
+		{
+			if (i + 1 >= ac)
+			{
+				fprintf(stderr, "ft_ping: option requires an argument -- 'i'\n");
+				return (-1);
+			}
+			ping->interval = atof(av[i + 1]);
+			if (ping->interval < 0.2)
+			{
+				fprintf(stderr, "ft_ping: bad timing interval.\n");
 				return (-1);
 			}
 			i++;
