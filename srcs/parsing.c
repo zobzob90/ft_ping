@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:10:01 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 14:19:27 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 14:39:15 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(char *progname)
 {
-	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] [-i interval] <destination>\n", progname);
+	fprintf(stderr, "Usage: %s [-v] [-?] [-c count] [-i interval] [-W timeout] <destination>\n", progname);
 }
 
 int	parse_arguments(int ac, char *av[], t_ping *ping)
@@ -64,6 +64,21 @@ int	parse_arguments(int ac, char *av[], t_ping *ping)
 			if (ping->interval < 0.2)
 			{
 				fprintf(stderr, "ft_ping: bad timing interval.\n");
+				return (-1);
+			}
+			i++;
+		}
+		else if (strcmp(av[i], "-W") == 0)
+		{
+			if (i + 1 >= ac)
+			{
+				fprintf(stderr, "ft_ping: option requires an argument -- 'W'\n");
+				return (-1);
+			}
+			ping->timeout = atoi(av[i + 1]);
+			if (ping->timeout <= 0)
+			{
+				fprintf(stderr, "ft_ping: bad wait time\n");
 				return (-1);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 13:28:31 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/24 15:04:07 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/26 14:39:41 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void create_socket(t_ping *ping)
 		perror("socket() failed");
 		exit (EXIT_FAILURE);
 	}
-	set_socket_timeout(ping->sockfd, 1);
+	set_socket_timeout(ping->sockfd, ping->timeout);
 }
 
 void resolve_hosts(t_ping *ping, char *host)
