@@ -1,16 +1,22 @@
 📡 ft_ping
-Premier de mes projets post tronc commun de l'ecole 42.
-ft_ping est une implémentation du programme ping en C, permettant de tester la connectivité réseau entre une machine locale et une cible distante à l’aide du protocole InternetControlMessageProtocol.
 
+Premier projet post tronc commun de l’école 42.
+
+ft_ping est une implémentation en C du programme ping, permettant de tester la connectivité réseau entre une machine locale et une cible distante à l’aide du protocole ICMP (Internet Control Message Protocol).
+
+🎯 Objectifs du projet
 Ce projet vise à comprendre :
-
 - le fonctionnement bas niveau du réseau
 - l’utilisation des raw sockets
 - la construction et l’analyse de paquets ICMP
-- la gestion du temps et des signaux
+- la gestion du temps (RTT) et des signaux
 
-Qu'est ce qu'est ICMP ?
-ICMP (Internet Control Message Protocol) est un protocole de la couche réseau utilisé pour le diagnostic et le contrôle des erreurs. Le programme ping repose sur l’échange de messages ICMP Echo Request et Echo Reply afin de mesurer la latence et la disponibilité d’une machine distante.
+🌐 Qu’est-ce que ICMP ?
+ICMP (Internet Control Message Protocol) est un protocole de la couche réseau utilisé pour le diagnostic et le contrôle des erreurs.
+Le programme ping repose sur l’échange de messages :
+- ICMP Echo Request
+- ICMP Echo Reply
+afin de mesurer la latence et la disponibilité d’une machine distante.
 
 🛠️ Compilation & Utilisation
 make
@@ -34,4 +40,3 @@ sudo ./ft_ping -v google.com
 │   └── utils.c    # Fonctions utilitaires (temps, affichage, erreurs…)
 ├── Makefile
 '''
-
