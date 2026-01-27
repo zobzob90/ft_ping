@@ -24,7 +24,8 @@ afin de mesurer la latence et la disponibilité d’une machine distante.
 make
 - sudo ./ft_ping [options] <destination>
 - sudo ./ft_ping -v google.com
-# ℹ️ Les raw sockets nécessitent les droits root.
+
+ ℹ️ Les raw sockets nécessitent les droits root.
 
 # 📁 Arborescence du projet
 ```
