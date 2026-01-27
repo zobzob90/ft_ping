@@ -6,7 +6,7 @@
 /*   By: eric <eric@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:10:01 by ertrigna          #+#    #+#             */
-/*   Updated: 2026/01/26 15:48:05 by eric             ###   ########.fr       */
+/*   Updated: 2026/01/27 10:09:45 by eric             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_usage(char *progname)
 {
-	fprintf(stderr, "Usage: %s [-v] [-?] [-n] [-c count] [-i interval] [-W timeout] <destination>\n", progname);
+	fprintf(stderr, "Usage: %s [-v] [-?] [-n] [-c count] [-i interval] [-W timeout] [-t ttl] <destination>\n", progname);
 }
 
 int	parse_arguments(int ac, char *av[], t_ping *ping)
@@ -81,6 +81,21 @@ int	parse_arguments(int ac, char *av[], t_ping *ping)
 			if (ping->timeout <= 0)
 			{
 				fprintf(stderr, "ft_ping: bad wait time\n");
+				return (-1);
+			}
+			i++;
+		}
+		else if (strcmp(av[i], "--ttl") == 0 || strcmp(av[i], "-t") == 0)
+		{
+			if (i + 1 >= ac)
+			{
+				fprintf(stderr, "ft_ping: option requires an argument -- 'ttl'\n");
+				return (-1);
+			}
+			ping->ttl = atoi(av[i + 1]);
+			if (ping->ttl < 1 || ping->ttl > 255)
+			{
+				fprintf(stderr, "ft_ping: ttl %d out of range\n", ping->ttl);
 				return (-1);
 			}
 			i++;
