@@ -42,3 +42,5 @@ make
 │   └── utils.c    # Fonctions utilitaires (temps, affichage, erreurs…)
 ├── Makefile
 ```
+# 👥 Contributeurs
+@ertrigna
